@@ -1,4 +1,5 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import BreweryDetail from './components/BreweryDetail';
 
 export default function Home() {
   return (
@@ -38,6 +39,8 @@ export default function Home() {
           priority
         />
       </div>
+
+      <BreweryDetail />
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
