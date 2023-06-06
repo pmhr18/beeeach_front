@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Environment of Development
+
+- node: 18.0.0-alpine
+- Next.js: 13.4.1
+- React: 18.2.0
+- Tailwindcss: 3.3.2
+- Typescript: 5.0.4
+
 ## Getting Started
 
 First, run the development server:
