@@ -202,7 +202,7 @@ function ItemStore () {
 				<h4>イメージ</h4>
 				<button
 					type="submit"
-					className='bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2'
+					className='btn btn-neutral'
 				>
 					レコードを登録する
 				</button>
