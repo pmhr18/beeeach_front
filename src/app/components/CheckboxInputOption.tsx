@@ -23,6 +23,7 @@ function CheckboxInputOption ({ label, name, options, onChange }: CheckboxInputO
       {options.map((option) => (
         <div key={option.id}>
           <input
+            className='checkbox checkbox-primary'
             type='checkbox'
             name={name}
             value={option.id}

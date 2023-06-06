@@ -13,6 +13,7 @@ function TextInput ({ label, name, value, placeholder, onChange }:TextInputProps
     <div>
       <label htmlFor={name}>{label}</label>
       <input
+        className='input input-bordered input-warning w-full max-w-xs'
 				id={name}
 				type="text"
 				name={name}
