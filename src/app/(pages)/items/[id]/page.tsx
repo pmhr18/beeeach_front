@@ -1,5 +1,5 @@
 'use client';
-import { apiClient } from '../../utils/api';
+import { apiClient } from '../../../utils/api';
 import { useEffect, useState } from 'react';
 
 interface Props {

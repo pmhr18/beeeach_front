@@ -1,12 +1,12 @@
 'use client';
 import React, { ChangeEvent, useState, useEffect } from 'react';
-import { apiClient } from '../utils/api';
-import TextInput from '../components/TextInput';
-import SelectInputOption from '../components/SelectInputOption';
-import CheckboxInputOption from '../components/CheckboxInputOption';
+import { apiClient } from '../../../utils/api';
+import TextInput from '../../../components/TextInput';
+import SelectInputOption from '../../../components/SelectInputOption';
+import CheckboxInputOption from '../../../components/CheckboxInputOption';
 
 interface Props {
-  id: number;
+	id: number;
   name: string;
 }
 
@@ -28,7 +28,7 @@ interface ItemProps {
   type: Props[];
 }
 
-function ItemStoreForm () {
+export default function ItemStoreForm () {
 
 	// フォーム初期表示
 	const [renderItemDetailValue, setRenderItemDetailValue] = useState<ItemProps>({
@@ -137,6 +137,7 @@ function ItemStoreForm () {
 			<h3>API_TEST_GET_ビール情報を登録するためのInputを初期表示</h3>
 			<form onSubmit={handleSubmit}>
 				<TextInput
+					className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
 					label='ビール名'
 					name='itemName'
 					value={inputValues.itemName}
@@ -164,7 +165,6 @@ function ItemStoreForm () {
 					options={renderItemDetailValue.prefecture}
 					onChange={(e) => setInputValues({ ...inputValues, prefectureId: Number(e.target.value) })}
 				/>
-				{/* <div className='flex'> */}
 				<CheckboxInputOption
 					label="テイスト"
 					name="tastes"
@@ -173,7 +173,6 @@ function ItemStoreForm () {
 					options={renderItemDetailValue.taste}
 					onChange={handleChangeTasteChecked}
 				/>
-				{/* </div> */}
 				<CheckboxInputOption
 					label="容器"
 					name="containers"
@@ -215,11 +214,9 @@ function ItemStoreForm () {
 					type="submit"
 					className='btn btn-neutral'
 				>
-					レコードを登録する
+					ビール情報を登録する
 				</button>
 			</form>
 		</div>
 	);
 }
-
-export default ItemStoreForm;

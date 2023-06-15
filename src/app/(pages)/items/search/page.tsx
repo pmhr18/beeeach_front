@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
-import { apiClient } from '../../utils/api';
+import { apiClient } from '../../../utils/api';
 
 interface Props {
   id: number;

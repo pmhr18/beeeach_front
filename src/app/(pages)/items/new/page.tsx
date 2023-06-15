@@ -1,5 +1,5 @@
 'use client';
-import ItemStoreForm from '../ItemStoreForm';
+import ItemStoreForm from '../../../features/components/items/ItemStoreForm';
 
 export default function Page() {
   // const router = useRouter()
