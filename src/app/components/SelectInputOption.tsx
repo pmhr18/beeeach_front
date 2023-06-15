@@ -16,9 +16,10 @@ interface SelectInputOptionProps {
 function SelectInputOption ({ label, name, value, options, onChange }:SelectInputOptionProps ) {
   return (
     <div>
-      <label htmlFor={name}>{label}</label>
+      {/* <label htmlFor={name}>{label}</label> */}
+      <h3>{label}</h3>
       <select
-        className='select select-warning w-full max-w-xs'
+        className='select select-sm select-primary rounded-full w-full max-w-xs'
         id={name}
         name={name}
         value={value}

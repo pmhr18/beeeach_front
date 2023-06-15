@@ -11,9 +11,10 @@ interface TextInputProps {
 function TextInput ({ label, name, value, placeholder, onChange }:TextInputProps ) {
   return (
     <div>
-      <label htmlFor={name}>{label}</label>
+      {/* <label htmlFor={name}>{label}</label> */}
+      <h3>{label}</h3>
       <input
-        className='input input-bordered input-warning w-full max-w-xs'
+        className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
 				id={name}
 				type="text"
 				name={name}

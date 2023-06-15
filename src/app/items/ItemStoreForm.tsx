@@ -28,7 +28,8 @@ interface ItemProps {
   type: Props[];
 }
 
-function ItemStore () {
+function ItemStoreForm () {
+
 	// フォーム初期表示
 	const [renderItemDetailValue, setRenderItemDetailValue] = useState<ItemProps>({
     brewery: [],
@@ -90,10 +91,14 @@ function ItemStore () {
 	const handleChangeTasteChecked = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
 		const id  = Number(value);
+
 		setInputValues((prevValues) => {
 			const updatedTasteChecked = [...prevValues.tasteChecked];
 			updatedTasteChecked[id - 1] = checked;
-			const updatedTasteId = checked ? [...prevValues.tasteId, id] : prevValues.tasteId.filter((tasteId) => tasteId !== id);
+			const updatedTasteId = checked
+				? [...prevValues.tasteId, id]
+				: prevValues.tasteId.filter((tasteId) => tasteId !== id);
+			
 			return { ...prevValues, tasteChecked: updatedTasteChecked, tasteId: updatedTasteId };
 		});
 	};
@@ -101,10 +106,14 @@ function ItemStore () {
 	const handleChangeContainerChecked = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
 		const id  = Number(value);
+
 		setInputValues((prevValues) => {
 			const updatedContainerChecked = [...prevValues.containerChecked];
 			updatedContainerChecked[id - 1] = checked;
-			const updatedContainerId = checked ? [...prevValues.containerId, id] : prevValues.containerId.filter((containerId) => containerId !== id);
+			const updatedContainerId = checked
+				? [...prevValues.containerId, id]
+				: prevValues.containerId.filter((containerId) => containerId !== id);
+			
 			return { ...prevValues, containerChecked: updatedContainerChecked, containerId: updatedContainerId };
 		});
 	};
@@ -155,6 +164,7 @@ function ItemStore () {
 					options={renderItemDetailValue.prefecture}
 					onChange={(e) => setInputValues({ ...inputValues, prefectureId: Number(e.target.value) })}
 				/>
+				{/* <div className='flex'> */}
 				<CheckboxInputOption
 					label="テイスト"
 					name="tastes"
@@ -163,6 +173,7 @@ function ItemStore () {
 					options={renderItemDetailValue.taste}
 					onChange={handleChangeTasteChecked}
 				/>
+				{/* </div> */}
 				<CheckboxInputOption
 					label="容器"
 					name="containers"
@@ -211,4 +222,4 @@ function ItemStore () {
 	);
 }
 
-export default ItemStore;
+export default ItemStoreForm;
