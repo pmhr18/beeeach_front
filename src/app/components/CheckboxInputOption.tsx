@@ -19,18 +19,19 @@ interface CheckboxInputOptionProps {
 function CheckboxInputOption ({ label, name, options, onChange }: CheckboxInputOptionProps) {
   return (
     <div>
-      <label>{label}</label>
+      {/* <label>{label}</label> */}
+      <h3 className='font-bold'>{label}</h3>
       {options.map((option) => (
-        <div key={option.id}>
+        <div key={option.id} className='inline-block'>
           <input
-            className='checkbox checkbox-primary'
+            aria-label={option.name}
+            className='btn btn-sm rounded-full m-1'
             type='checkbox'
             name={name}
             value={option.id}
             checked={option.checked}
             onChange={onChange}
           />
-          <label>{option.name}</label>
         </div>
       ))}
     </div>
