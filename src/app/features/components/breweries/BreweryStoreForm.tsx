@@ -19,7 +19,7 @@ interface CheckboxProps {
 interface RenderBreweryProps {
   country: Props[];
   prefecture: Props[];
-  storeInfo: Props[];
+  storeInfo: CheckboxProps[];
 }
 
 export default function BreweryStoreForm () {
@@ -90,7 +90,7 @@ export default function BreweryStoreForm () {
     const requestData = inputValues;
   
     try {
-      const response = await apiClient.post('/items', requestData);
+      const response = await apiClient.post('/breweries', requestData);
       console.log('ビール情報登録用のpostリクエストが成功しました。', response.data);
     } catch (e) {
       console.error('ビール情報登録用のpostリクエストが失敗しました。', e);
@@ -103,14 +103,22 @@ export default function BreweryStoreForm () {
 			<form onSubmit={handleSubmit}>
 				<TextInput
 					className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
-					label='ビール名'
+					label='ブルワリー名'
 					name='breweryName'
 					value={inputValues.breweryName}
-					placeholder='ビール名を入力してください'
+					placeholder='ブルワリー名を入力してください'
 					onChange={(e) => setInputValues({ ...inputValues, breweryName: e.target.value })}
 				/>
+				<TextInput
+					className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
+					label='正式名称'
+					name='formalName'
+					value={inputValues.formalName}
+					placeholder='正式名称を入力してください'
+					onChange={(e) => setInputValues({ ...inputValues, formalName: e.target.value })}
+				/>
 				<SelectInputOption
-					label='生産国'
+					label='国'
 					name='country'
 					value={inputValues.countryId}
 					options={renderBreweryDetailValue.country}
@@ -123,9 +131,25 @@ export default function BreweryStoreForm () {
 					options={renderBreweryDetailValue.prefecture}
 					onChange={(e) => setInputValues({ ...inputValues, prefectureId: Number(e.target.value) })}
 				/>
+				<TextInput
+					className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
+					label='住所'
+					name='address'
+					value={inputValues.address}
+					placeholder='住所を入力してください'
+					onChange={(e) => setInputValues({ ...inputValues, address: e.target.value })}
+				/>
+				<TextInput
+					className='input input-sm input-bordered input-primary rounded-full w-full max-w-xs'
+					label='アクセス'
+					name='access'
+					value={inputValues.access}
+					placeholder='アクセス方法を入力してください'
+					onChange={(e) => setInputValues({ ...inputValues, access: e.target.value })}
+				/>
 				<CheckboxInputOption
-					label="テイスト"
-					name="tastes"
+					label="醸造所詳細"
+					name="storeInfo"
 					value={inputValues.storeInfoId}
 					checked={inputValues.storeInfoChecked}
 					options={renderBreweryDetailValue.storeInfo}
