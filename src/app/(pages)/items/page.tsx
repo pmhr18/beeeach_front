@@ -1,12 +1,12 @@
 'use client';
 import Link from 'next/link'
-import ItemTextSearchForm from './ItemTextSearchForm';
-import ItemSearchConditionForm from './ItemSearchConditionForm';
+import ItemKeywordSearchForm from '../../features/components/items/ItemKeywordSearchForm';
+import ItemSearchConditionForm from '../../features/components/items/ItemSearchConditionForm';
 
 export default function Page() {
   return (
     <div className="flex min-h-screen flex-col p-24">
-      <ItemTextSearchForm />
+      <ItemKeywordSearchForm />
       <label htmlFor="search_modal" className="btn">open search modal</label>
       <input type="checkbox" id="search_modal" className="modal-toggle" />
         <div className="modal">

@@ -1,8 +1,8 @@
 'use client';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { apiClient } from '../utils/api';
-import CheckboxInputOption from '../components/CheckboxInputOption';
+import { apiClient } from '../../../utils/api';
+import CheckboxInputOption from '../../../components/CheckboxInputOption';
 
 interface CheckboxProps {
 	id: number;
@@ -67,7 +67,8 @@ export default function ItemSearchConditionForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get('/items/create');
+        // const response = await apiClient.get('/items/create');
+        const response = await apiClient.get('/items/conditions/index');
         const responseData: RenderValues = response.data;
         console.log('検索条件用の初期getリクエストが成功しました。', responseData);
         setRenderConditionValue(responseData);
@@ -91,6 +92,7 @@ export default function ItemSearchConditionForm() {
     typeId: [],
   });
 
+  // 検索条件のチェックボックスのステータスを管理
   const [inputConditionChecked, setInputConditionChecked] = useState<ConditionChecked>({
     breweryChecked: [],
     countryChecked: [],
@@ -172,8 +174,7 @@ export default function ItemSearchConditionForm() {
         }
       })
       .join('&');
-      const url = queryParams.length > 0 ? `/items/search?${queryParams}` : '/items/search';
-
+      const url = queryParams.length > 0 ? `/items/search?${queryParams}` : '/items/search?';
       router.push(url);
     
     } catch (e) {
@@ -183,85 +184,84 @@ export default function ItemSearchConditionForm() {
 
   return (
     <div>
-      <h2>ビール情報を登録</h2>
-        <h3>API_TEST_GET_ビール情報を登録するためのInputを初期表示</h3>
-          <form onSubmit={handleSubmit}>
-            <CheckboxInputOption
-              label='醸造所'
-              name='brewery'
-              value={inputConditionValues.breweryId}
-              checked={inputConditionChecked.breweryChecked}
-              options={renderConditionValue.brewery}
-              onChange={handleChangeBreweryChecked}
-            />
-            <CheckboxInputOption
-              label='生産国'
-              name='country'
-              value={inputConditionValues.countryId}
-              checked={inputConditionChecked.countryChecked}
-              options={renderConditionValue.country}
-              onChange={handleChangeCountryChecked}
-            />
-            <CheckboxInputOption
-              label='都道府県'
-              name='prefecture'
-              value={inputConditionValues.prefectureId}
-              checked={inputConditionChecked.prefectureChecked}
-              options={renderConditionValue.prefecture}
-              onChange={handleChangePrefectureChecked}
-            />
-            <CheckboxInputOption
-              label="テイスト"
-              name="tastes"
-              value={inputConditionValues.tasteId}
-              checked={inputConditionChecked.tasteChecked}
-              options={renderConditionValue.taste}
-              onChange={handleChangeTasteChecked}
-            />
-            <CheckboxInputOption
-              label="容器"
-              name="containers"
-              value={inputConditionValues.containerId}
-              checked={inputConditionChecked.containerChecked}
-              options={renderConditionValue.container}
-              onChange={handleChangeContainerChecked}
-            />
-            <CheckboxInputOption
-              label='スタイル'
-              name='style'
-              value={inputConditionValues.styleId}
-              checked={inputConditionChecked.styleChecked}
-              options={renderConditionValue.style}
-              onChange={handleChangeStyleChecked}
-            />
-            <CheckboxInputOption
-              label='カラー'
-              name='color'
-              value={inputConditionValues.colorId}
-              checked={inputConditionChecked.colorChecked}
-              options={renderConditionValue.color}
-              onChange={handleChangeColorChecked}
-            />
-            <CheckboxInputOption
-              label='アルコール度数'
-              name='abv'
-              value={inputConditionValues.abvId}
-              checked={inputConditionChecked.abvChecked}
-              options={renderConditionValue.abv}
-              onChange={handleChangeAbvChecked}
-            />
-            <CheckboxInputOption
-              label='種類'
-              name='type'
-              value={inputConditionValues.typeId}
-              checked={inputConditionChecked.typeChecked}
-              options={renderConditionValue.type}
-              onChange={handleChangeTypeChecked}
-            />
-            <button type="submit" className='btn btn-neutral'>
-              検索する
-            </button>
-          </form>
+      <h2>検索条件を決める</h2>
+        <form onSubmit={handleSubmit}>
+          <CheckboxInputOption
+            label='醸造所'
+            name='brewery'
+            value={inputConditionValues.breweryId}
+            checked={inputConditionChecked.breweryChecked}
+            options={renderConditionValue.brewery}
+            onChange={handleChangeBreweryChecked}
+          />
+          <CheckboxInputOption
+            label='生産国'
+            name='country'
+            value={inputConditionValues.countryId}
+            checked={inputConditionChecked.countryChecked}
+            options={renderConditionValue.country}
+            onChange={handleChangeCountryChecked}
+          />
+          <CheckboxInputOption
+            label='都道府県'
+            name='prefecture'
+            value={inputConditionValues.prefectureId}
+            checked={inputConditionChecked.prefectureChecked}
+            options={renderConditionValue.prefecture}
+            onChange={handleChangePrefectureChecked}
+          />
+          <CheckboxInputOption
+            label="テイスト"
+            name="tastes"
+            value={inputConditionValues.tasteId}
+            checked={inputConditionChecked.tasteChecked}
+            options={renderConditionValue.taste}
+            onChange={handleChangeTasteChecked}
+          />
+          <CheckboxInputOption
+            label="容器"
+            name="containers"
+            value={inputConditionValues.containerId}
+            checked={inputConditionChecked.containerChecked}
+            options={renderConditionValue.container}
+            onChange={handleChangeContainerChecked}
+          />
+          <CheckboxInputOption
+            label='スタイル'
+            name='style'
+            value={inputConditionValues.styleId}
+            checked={inputConditionChecked.styleChecked}
+            options={renderConditionValue.style}
+            onChange={handleChangeStyleChecked}
+          />
+          <CheckboxInputOption
+            label='カラー'
+            name='color'
+            value={inputConditionValues.colorId}
+            checked={inputConditionChecked.colorChecked}
+            options={renderConditionValue.color}
+            onChange={handleChangeColorChecked}
+          />
+          <CheckboxInputOption
+            label='アルコール度数'
+            name='abv'
+            value={inputConditionValues.abvId}
+            checked={inputConditionChecked.abvChecked}
+            options={renderConditionValue.abv}
+            onChange={handleChangeAbvChecked}
+          />
+          <CheckboxInputOption
+            label='種類'
+            name='type'
+            value={inputConditionValues.typeId}
+            checked={inputConditionChecked.typeChecked}
+            options={renderConditionValue.type}
+            onChange={handleChangeTypeChecked}
+          />
+          <button type="submit" className='btn btn-neutral'>
+            検索する
+          </button>
+        </form>
     </div>
 	);  
 }
