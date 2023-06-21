@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import TextInput from '../../../components/TextInput';
 
-export default function ItemTextSearchForm() {
+export default function ItemKeywordSearchForm() {
 	const router = useRouter()
 	const [inputKeyword, setInputKeyword] = useState<string>('');
 

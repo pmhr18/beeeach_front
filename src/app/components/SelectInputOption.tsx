@@ -25,7 +25,7 @@ function SelectInputOption ({ label, name, value, options, onChange }:SelectInpu
         value={value}
         onChange={onChange}
       >
-        <option disabled selected value={0}>選択してください</option>
+        <option disabled value={0}>選択してください</option>
         {options.map((option, i) => (
           <option key={i} value={option.id}>{option.name}</option>
         ))}

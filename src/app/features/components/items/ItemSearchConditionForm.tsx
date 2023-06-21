@@ -67,7 +67,8 @@ export default function ItemSearchConditionForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get('/items/create');
+        // const response = await apiClient.get('/items/create');
+        const response = await apiClient.get('/items/conditions/index');
         const responseData: RenderValues = response.data;
         console.log('検索条件用の初期getリクエストが成功しました。', responseData);
         setRenderConditionValue(responseData);

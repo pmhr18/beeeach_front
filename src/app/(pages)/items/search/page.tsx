@@ -4,30 +4,25 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../../utils/api';
 
-interface Props {
-  id: number;
-  name: string;
-}
-
-interface BuildItem {
+interface BuildItems {
   item_id: number;
   item_name: string;
-  country: Props;
-  prefecture: Props;
-  color: Props;
-  style: Props;
-  abv: Props;
-  type: Props;
-  brewery: Props;
-  tastes: Props[];
-  containers: Props[];
+  country: string;
+  prefecture: string;
+  color: string;
+  style: string;
+  abv: string;
+  type: string;
+  brewery: string;
+  tastes: string[];
+  containers: string[];
 }
 
 export default function SearchResults() {
   const searchParams = useSearchParams();
 
   // 検索条件の値をpost通信しresponseで得たデータをfetchする
-  const [buildItems, setBuildItems] = useState<BuildItem[]>([]);
+  const [buildItems, setBuildItems] = useState<BuildItems[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +56,7 @@ export default function SearchResults() {
           typeId: typeId,
         };
 
-        const response = await apiClient.post('/items/search', requestData);
+        const response = await apiClient.post('/items/conditions/result', requestData);
         console.log('ビール情報表示用のpostリクエストが成功しました。', response.data);
         setBuildItems(response.data);
 
@@ -79,22 +74,22 @@ export default function SearchResults() {
       {buildItems.length === 0 ? (
         <p>該当するアイテムはありません。</p>
       ) : (
-        buildItems.map((item) => (
-          <div key={item.item_id} className='card w-auto bg-base-100 shadow-xl m-2 p-4'>
-            <Link href={`/items/${item.item_id}`}>
-              <div>{item.item_name}</div>
-              <div>{item.country.name}</div>
-              <div>{item.prefecture.name}</div>
-              <div>{item.color.name}</div>
-              <div className='badge badge-lg badge-accent rounded-none'>{item.style.name}</div>
-              <div>{item.type.name}</div>
-              <div>{item.abv.name}</div>
-              <div>{item.brewery.name}</div>
-              {item.tastes.map((taste) => (
-                <div key={taste.id} className='badge badge-primary'>{taste.name}</div>
+        buildItems.map((buildItem) => (
+          <div key={buildItem.item_id} className='card w-auto bg-base-100 shadow-xl m-2 p-4'>
+            <Link href={`/items/${buildItem.item_id}`}>
+              <div className='badge badge-lg badge-accent rounded-none'>{buildItem.style}</div>
+              <div>{buildItem.item_name}</div>
+              {buildItem.tastes.map((taste,i) => (
+                <div key={i} className='badge badge-primary'>{taste}</div>
               ))}
-              {item.containers.map((container) => (
-                <div key={container.id} className='badge badge-outline'>{container.name}</div>
+              <div>{buildItem.country}</div>
+              <div>{buildItem.prefecture}</div>
+              <div>{buildItem.brewery}</div>
+              <div>{buildItem.color}</div>
+              <div>{buildItem.type}</div>
+              <div>{buildItem.abv}</div>
+              {buildItem.containers.map((container,i) => (
+                <div key={i} className='badge badge-outline'>{container}</div>
               ))}
             </Link>
           </div>
