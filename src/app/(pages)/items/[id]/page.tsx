@@ -40,7 +40,7 @@ export default function Item({ params }: { params: { id: number } }) {
       <h2>My Post: {params.id}</h2>
       <h2>取得した値</h2>
       {buildItem ? (
-        <div className='card w-auto bg-base-100 shadow-xl m-2 p-4'>
+        <div className='w-auto bg-base-100 shadow-xl my-2 p-4'>
           <div>{buildItem.item_name}</div>
           <div>{buildItem.country}</div>
           <div>{buildItem.prefecture}</div>

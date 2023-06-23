@@ -1,18 +1,18 @@
 'use client';
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { apiClient } from '../../../utils/api';
-import TextInput from '../../../components/TextInput';
-import SelectInputOption from '../../../components/SelectInputOption';
-import CheckboxInputOption from '../../../components/CheckboxInputOption';
+import TextInput from '../../common/TextInput';
+import SelectInputOption from '../../common/SelectInputOption';
+import CheckboxInputOption from '../../common/CheckboxInputOption';
 
 interface Props {
 	id: number;
-  name: string;
+	name: string;
 }
 
 interface CheckboxProps {
 	id: number;
-  name: string;
+	name: string;
 	checked: boolean;
 }
 
