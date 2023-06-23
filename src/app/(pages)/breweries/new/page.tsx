@@ -1,9 +1,9 @@
 'use client';
-import BreweryStoreForm from '../../../features/components/breweries/BreweryStoreForm';
+import BreweryStoreForm from '../../../components/features/breweries/BreweryStoreForm';
 
 export default function Home() {
 	return (
-    <div className="flex min-h-screen flex-col p-24">
+    <div className="flex min-h-screen flex-col">
       <BreweryStoreForm />
     </div>
 	)

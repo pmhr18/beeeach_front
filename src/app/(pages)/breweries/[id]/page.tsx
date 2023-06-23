@@ -45,7 +45,7 @@ export default function Item({ params }: { params: { id: number } }) {
       <h2>My Post: {params.id}</h2>
       <h2>取得した値</h2>
       {buildBrewery ? (
-        <div className='card w-auto bg-base-100 shadow-xl m-2 p-4'>
+        <div className='w-auto bg-base-100 shadow-xl my-2 p-4'>
           <div>{buildBrewery.brewery_name}</div>
           <div>{buildBrewery.formal_name}</div>
           {buildBrewery.store_info.map((store_info, i) => (
@@ -62,9 +62,9 @@ export default function Item({ params }: { params: { id: number } }) {
         <div>Loading...</div>
       )}
 
-			<div className="carousel rounded-box w-6/12">
+			<div className="carousel rounded-box w-6/12 flex">
 				{buildBreweryItems.map((buildbreweryItem) => (
-          <div key={buildbreweryItem.item_id} className='carousel-item card w-48 bg-base-100 shadow-xl m-2 p-4'>
+          <div key={buildbreweryItem.item_id} className='carousel-item w-48 bg-base-100 shadow-xl m-2 p-4'>
               <div className='badge badge-lg badge-accent rounded-none'>{buildbreweryItem.style}</div>
               <div>{buildbreweryItem.item_name}</div>
           </div>

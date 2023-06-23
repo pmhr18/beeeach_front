@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { apiClient } from '../../../utils/api';
-import CheckboxInputOption from '../../../components/CheckboxInputOption';
+import CheckboxInputOption from '../../common/CheckboxInputOption';
 
 interface CheckboxProps {
 	id: number;
@@ -175,6 +175,7 @@ export default function ItemSearchConditionForm() {
       })
       .join('&');
       const url = queryParams.length > 0 ? `/items/search?${queryParams}` : '/items/search?';
+      // router.replace(url);
       router.push(url);
     
     } catch (e) {

@@ -1,9 +1,9 @@
 'use client';
-import ItemStoreForm from '../../../features/components/items/ItemStoreForm';
+import ItemStoreForm from '../../../components/features/items/ItemStoreForm';
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col p-24">
+    <div className="flex min-h-screen flex-col">
       <ItemStoreForm />
     </div>
   )

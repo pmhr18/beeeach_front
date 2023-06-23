@@ -1,13 +1,13 @@
 'use client';
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { apiClient } from '../../../utils/api';
-import TextInput from '../../../components/TextInput';
-import SelectInputOption from '../../../components/SelectInputOption';
-import CheckboxInputOption from '../../../components/CheckboxInputOption';
+import TextInput from '../../common/TextInput';
+import SelectInputOption from '../../common/SelectInputOption';
+import CheckboxInputOption from '../../common/CheckboxInputOption';
 
 interface Props {
 	id: number;
-  name: string;
+	name: string;
 }
 
 interface CheckboxProps {
@@ -17,7 +17,7 @@ interface CheckboxProps {
 }
 
 interface RenderBreweryProps {
-  country: Props[];
+	country: Props[];
   prefecture: Props[];
   storeInfo: CheckboxProps[];
 }
@@ -82,7 +82,6 @@ export default function BreweryStoreForm () {
 			return { ...prevValues, storeInfoChecked: updatedstoreInfoChecked, storeInfoId: updatedstoreInfoId };
 		});
 	};
-
 
 	// 取得した値をpost通信する
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

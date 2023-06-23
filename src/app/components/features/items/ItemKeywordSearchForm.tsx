@@ -1,15 +1,15 @@
 'use client';
 import React, { ChangeEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import TextInput from '../../../components/TextInput';
+import TextInput from '../../common/TextInput';
 
 export default function ItemKeywordSearchForm() {
 	const router = useRouter()
 	const [inputKeyword, setInputKeyword] = useState<string>('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputKeyword(e.target.value);
-  };
+	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,17 +24,19 @@ export default function ItemKeywordSearchForm() {
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
-				<TextInput
-					className='input input-bordered input-primary rounded-full w-full'
-					label=''
-					name='itemName'
-					value={inputKeyword}
-					placeholder='気になるキーワードでビールをサーチしよう'
-					onChange={handleChange}
-				/>
-				<button type="submit" className='btn btn-primary rounded-full'>
-					検索する
-				</button>
+				<div className='flex'>
+					<TextInput
+						className='input input-bordered input-primary rounded-full w-full'
+						label=''
+						name='itemName'
+						value={inputKeyword}
+						placeholder='気になるキーワードでビールをサーチしよう'
+						onChange={handleChange}
+					/>
+					<button type="submit" className='btn btn-primary rounded-full'>
+						検索する
+					</button>
+				</div>
 			</form>
 		</>
 	);

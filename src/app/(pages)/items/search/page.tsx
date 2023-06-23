@@ -75,7 +75,7 @@ export default function SearchResults() {
         <p>該当するアイテムはありません。</p>
       ) : (
         buildItems.map((buildItem) => (
-          <div key={buildItem.item_id} className='card w-auto bg-base-100 shadow-xl m-2 p-4'>
+          <div key={buildItem.item_id} className='w-auto bg-base-100 shadow-xl my-2 p-4'>
             <Link href={`/items/${buildItem.item_id}`}>
               <div className='badge badge-lg badge-accent rounded-none'>{buildItem.style}</div>
               <div>{buildItem.item_name}</div>

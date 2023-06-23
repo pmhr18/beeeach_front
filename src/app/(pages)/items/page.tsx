@@ -1,23 +1,12 @@
 'use client';
 import Link from 'next/link'
-import ItemKeywordSearchForm from '../../features/components/items/ItemKeywordSearchForm';
-import ItemSearchConditionForm from '../../features/components/items/ItemSearchConditionForm';
+import ItemKeywordSearchForm from '../../components/features/items/ItemKeywordSearchForm';
+import ItemSearchConditionForm from '../../components/features/items/ItemSearchConditionForm';
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen flex-col p-24">
-      <ItemKeywordSearchForm />
-      <label htmlFor="search_modal" className="btn">open search modal</label>
-      <input type="checkbox" id="search_modal" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box w-11/12 max-w-5xl">
-            <ItemSearchConditionForm />
-          </div>
-          <label className="modal-backdrop" htmlFor="search_modal"></label>
-        </div>
-      <Link href="/items/new">
-        <button className='btn btn-sm btn-primary'>登録する</button>
-      </Link>
+    <div className="flex min-h-screen flex-col">
+      ページ廃止予定
     </div>
   )
 }
