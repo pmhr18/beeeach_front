@@ -1,6 +1,6 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { apiClient } from '../../../utils/api';
 
 export default function AuthCallbackPage() {

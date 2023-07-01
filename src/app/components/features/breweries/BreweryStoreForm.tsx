@@ -12,7 +12,7 @@ interface Props {
 
 interface CheckboxProps {
 	id: number;
-  name: string;
+	name: string;
 	checked: boolean;
 }
 

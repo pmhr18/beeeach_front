@@ -1,12 +1,12 @@
 'use client';
-import { apiClient } from '../../utils/api';
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link'
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faLine } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { apiClient } from '../../utils/api';
 // import axios from 'axios';
 
 export default function Login() {
@@ -17,8 +17,8 @@ export default function Login() {
     try {
       const response = await apiClient.get('/login/google');
       window.location.href = response.data;
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
     }
   };
 
