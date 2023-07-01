@@ -87,7 +87,7 @@ export default function BreweryStoreForm () {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const requestData = inputValues;
-  
+
     try {
       const response = await apiClient.post('/breweries', requestData);
       console.log('ビール情報登録用のpostリクエストが成功しました。', response.data);

@@ -10,15 +10,19 @@ module.exports = {
       center: true,
     },
     extend: {
-      // backgroundImage: {
-      //   'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      //   'gradient-conic':
-      //     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      // },
+      width: {
+        '128': '32rem',
+        '256': '64rem',
+      },
+      colors: {
+        "google": "#991b1b",
+        "line": "#22c55e",
+        "twitter": "#0ea5e9",
+      }
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
     daisyui: {
-    themes: ["bumblebee",],
+      themes: ["bumblebee",],
   },
 }
