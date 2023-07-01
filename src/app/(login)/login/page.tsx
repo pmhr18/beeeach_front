@@ -49,11 +49,13 @@ export default function Login() {
                 <div className='flex-one'><FontAwesomeIcon icon={faGoogle} className='fa-xl color-google hover:color-base-100' /></div>
                 <div className='grow'>Googleで新規登録</div>
                 <div className='flex-one'></div>
-              </button><button className='btn border-line bg-base-100 text-line hover:border-line hover:bg-line hover:text-base-100 flex' onClick={googleLogin} disabled={loading}>
+              </button>
+              <button className='btn border-line bg-base-100 text-line hover:border-line hover:bg-line hover:text-base-100 flex' onClick={googleLogin} disabled={loading}>
                 <div className='flex-one'><FontAwesomeIcon icon={faLine} className='fa-xl color-line hover:color-base-100' /></div>
                 <div className='grow'>LINEで新規登録</div>
                 <div className='flex-one'></div>
-              </button><button className='btn border-twitter bg-base-100 text-twitter hover:border-twitter hover:bg-twitter hover:text-base-100 flex' onClick={googleLogin} disabled={loading}>
+              </button>
+              <button className='btn border-twitter bg-base-100 text-twitter hover:border-twitter hover:bg-twitter hover:text-base-100 flex' onClick={googleLogin} disabled={loading}>
                 <div className='flex-one'><FontAwesomeIcon icon={faTwitter} className='fa-xl color-twitter hover:color-base-100' /></div>
                 <div className='grow'>Twitterで新規登録</div>
                 <div className='flex-one'></div>

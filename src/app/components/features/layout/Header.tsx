@@ -1,5 +1,5 @@
 'use client';
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,6 +15,31 @@ export default function Header() {
   //   setIsModalOpen(false);
   // };
 
+  const checkLoginStatus = () => {
+    const token = sessionStorage.getItem('token');
+    return token !== null;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const isLoggedIn = checkLoginStatus();
+        console.log('ログイン状態:', isLoggedIn);
+      } catch (e) {
+        console.error('エラー:', e);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+	const handleLogout = () => {
+		sessionStorage.removeItem('token');
+		// ログアウト後の処理
+		window.location.href = '/';
+	};
+	
+
 	return (
     <div className="fixed lg:static navbar bg-base-100">
 			<div className="navbar-start">
@@ -23,26 +48,32 @@ export default function Header() {
 						<FontAwesomeIcon icon={faBarsStaggered} className="fa-lg" />
 					</label>
           <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-						<li>
-							<Link href="/login">
-								ログイン
-							</Link>
-						</li>
-						<li>
-							<Link href="/login">
-								新規登録
-							</Link>
-						</li>
+						{checkLoginStatus() ? null : (
+							<>
+								<li>
+									<Link href="/login">
+										ログイン
+									</Link>
+								</li>
+								<li>
+									<Link href="/login">
+										新規登録
+									</Link>
+								</li>
+							</>
+						)}
 						<li>
 							<Link href="/about">
 								beeeachについて
 							</Link>
 						</li>
-						<li>
-							<Link href="/items/new">
-								ビール情報を登録する
-							</Link>
-						</li>
+						{checkLoginStatus() ? (
+							<li>
+								<Link href="/items/new">
+									ビール情報を登録する
+								</Link>
+							</li>
+						) : null}
           </ul>
         </div>
 				<div className="hidden lg:flex">
@@ -52,11 +83,13 @@ export default function Header() {
 								beeeachについて
 							</Link>
 						</li>
+						{checkLoginStatus() ? (
 						<li>
 							<Link href="/items/new">
 								ビール情報を登録する
 							</Link>
 						</li>
+						) : null}
 					</ul>
 				</div>
       </div>
@@ -75,6 +108,7 @@ export default function Header() {
 
       <div className="navbar-end">
 
+			{checkLoginStatus() ? null : (
 				<div className="hidden lg:flex">
 					<ul className="menu menu-horizontal px-1">
 						<li>
@@ -89,6 +123,7 @@ export default function Header() {
 						</li>
 					</ul>
 				</div>
+				)}
 
 				<label htmlFor="search_modal" className="btn btn-ghost btn-circle">
 					<FontAwesomeIcon icon={faMagnifyingGlass} className="fa-lg" />
@@ -101,11 +136,19 @@ export default function Header() {
 					<label className="modal-backdrop" htmlFor="search_modal"></label>
 					</div>
 
-					<button className="btn btn-ghost btn-circle avatar">
-					<div className="w-10 rounded-full">
-						<img src="/IMG_6868.jpeg" />
+				{checkLoginStatus() ? (
+					<div className="dropdown dropdown-end">
+						<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+							<div className="w-10 rounded-full">
+								<img src="/IMG_6868.jpeg" />
+							</div>
+						</label>
+						<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+						<li><a>マイページ</a></li>
+						<li onClick={handleLogout}><a>ログアウト</a></li>
+						</ul>
 					</div>
-				</button>
+				) : null}
 
       </div>
     </div>
