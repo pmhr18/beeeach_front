@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { apiClient } from '../../../utils/api';
 
-export default function AuthCallbackPage() {
+export default function TwitterCallbackPage() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
@@ -12,7 +12,7 @@ export default function AuthCallbackPage() {
       try {
 				const callbackParams = Array.from(searchParams.entries());
 				const queryString = callbackParams.map(([key, value]) => `${key}=${value}`).join('&');
-				const response = await apiClient.get(`/login/google/callback?${queryString}`);
+				const response = await apiClient.get(`/login/twitter/callback?${queryString}`);
 				console.log('success!!!!!', response.data);
         const { user_id } = response.data;
         const { access_token } = response.data;

@@ -19,7 +19,7 @@ interface CheckboxProps {
 interface RenderBreweryProps {
 	country: Props[];
   prefecture: Props[];
-  storeInfo: CheckboxProps[];
+	storeInfo: CheckboxProps[];
 }
 
 export default function BreweryStoreForm () {

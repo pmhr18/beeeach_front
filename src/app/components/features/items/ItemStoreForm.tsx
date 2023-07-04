@@ -17,7 +17,7 @@ interface CheckboxProps {
 }
 
 interface ItemProps {
-  brewery: Props[];
+	brewery: Props[];
 	country: Props[];
   prefecture: Props[];
   taste: CheckboxProps[];

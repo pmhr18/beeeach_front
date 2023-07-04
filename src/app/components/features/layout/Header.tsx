@@ -5,7 +5,15 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { apiClient } from '../../../utils/api';
 import ItemSearchConditionForm from '../items/ItemSearchConditionForm';
+
+interface FetchUserValue {
+	user_id: number;
+	user_name: string;
+	email: string;
+	avatar: string;
+}
 
 export default function Header() {
 
@@ -14,6 +22,8 @@ export default function Header() {
   // const closeModal = () => {
   //   setIsModalOpen(false);
   // };
+
+	const [fetchUserValue, setFetchUserValue] = useState<FetchUserValue[]>([]);
 
   const checkLoginStatus = () => {
     const token = sessionStorage.getItem('token');
@@ -25,6 +35,12 @@ export default function Header() {
       try {
         const isLoggedIn = checkLoginStatus();
         console.log('ログイン状態:', isLoggedIn);
+				const id = sessionStorage.getItem('id');
+				console.log(id);
+				const response = await apiClient.get(`/users/${id}`);
+				const responseData: FetchUserValue = response.data.data;
+				console.log(responseData);
+				setFetchUserValue(responseData);
       } catch (e) {
         console.error('エラー:', e);
       }
@@ -38,7 +54,6 @@ export default function Header() {
 		// ログアウト後の処理
 		window.location.href = '/';
 	};
-	
 
 	return (
     <div className="fixed lg:static navbar bg-base-100">
@@ -140,7 +155,8 @@ export default function Header() {
 					<div className="dropdown dropdown-end">
 						<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 							<div className="w-10 rounded-full">
-								<img src="/IMG_6868.jpeg" />
+								<img src={fetchUserValue.avatar} />
+								{/* <img src="/IMG_6868.jpeg" /> */}
 							</div>
 						</label>
 						<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
