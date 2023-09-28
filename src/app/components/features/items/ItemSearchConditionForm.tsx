@@ -176,7 +176,8 @@ export default function ItemSearchConditionForm() {
       .join('&');
       const url = queryParams.length > 0 ? `/items/search?${queryParams}` : '/items/search?';
       // router.replace(url);
-      router.push(url);
+      // router.push(url);
+      window.location.href = url;
     
     } catch (e) {
       console.error('URLパラメータ引き渡し及び遷移処理が失敗しました。',e);

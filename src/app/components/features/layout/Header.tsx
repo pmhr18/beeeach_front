@@ -1,12 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faBarsStaggered, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { apiClient } from '../../../utils/api';
 import ItemSearchConditionForm from '../items/ItemSearchConditionForm';
+import LogoBeer from '../../../components/common/LogoBeer';
 
 interface FetchUserValue {
 	user_id: number;
@@ -16,42 +15,44 @@ interface FetchUserValue {
 }
 
 export default function Header() {
-
-	// const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
-
-	const [fetchUserValue, setFetchUserValue] = useState<FetchUserValue[]>([]);
-
-  const checkLoginStatus = () => {
+	
+	// 取得したユーザー情報を格納する値の初期値を設定
+	const [fetchUserValue, setFetchUserValue] = useState<FetchUserValue>({
+		user_id: 0,
+		user_name: '',
+		email: '',
+		avatar: '',
+	});
+	
+	const checkLoginStatus = () => {
     const token = sessionStorage.getItem('token');
     return token !== null;
-  };
+	};
 
-  useEffect(() => {
+	useEffect(() => {
     const fetchData = async () => {
-      try {
+			try {
         const isLoggedIn = checkLoginStatus();
         console.log('ログイン状態:', isLoggedIn);
 				const id = sessionStorage.getItem('id');
 				console.log(id);
 				const response = await apiClient.get(`/users/${id}`);
+				
 				const responseData: FetchUserValue = response.data.data;
+				
 				console.log(responseData);
 				setFetchUserValue(responseData);
-      } catch (e) {
+				
+			} catch (e) {
         console.error('エラー:', e);
-      }
+			}
     };
 
     fetchData();
-  }, []);
+	}, []);
 
 	const handleLogout = () => {
 		sessionStorage.removeItem('token');
-		// ログアウト後の処理
 		window.location.href = '/';
 	};
 
@@ -62,11 +63,11 @@ export default function Header() {
 					<label tabIndex={0} className="btn btn-ghost btn-circle">
 						<FontAwesomeIcon icon={faBarsStaggered} className="fa-lg" />
 					</label>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+					<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 						{checkLoginStatus() ? null : (
 							<>
 								<li>
-									<Link href="/login">
+									<Link href="/login?show=signin">
 										ログイン
 									</Link>
 								</li>
@@ -89,7 +90,7 @@ export default function Header() {
 								</Link>
 							</li>
 						) : null}
-          </ul>
+					</ul>
         </div>
 				<div className="hidden lg:flex">
 					<ul className="menu menu-horizontal px-1">
@@ -107,27 +108,21 @@ export default function Header() {
 						) : null}
 					</ul>
 				</div>
-      </div>
-      
-			<div className="navbar-center">
-				<Link href="/">
-					<Image
-						src="/logo_beer.svg"
-						alt="beeeach Logo"
-						width={48}
-						height={48}
-						priority
-					/>
-				</Link>
-      </div>
+    </div>
+    
+		<div className="navbar-center">
+			<Link href="/">
+				<LogoBeer width={48} height={48} />
+			</Link>
+    </div>
 
-      <div className="navbar-end">
+    <div className="navbar-end">
 
 			{checkLoginStatus() ? null : (
 				<div className="hidden lg:flex">
 					<ul className="menu menu-horizontal px-1">
 						<li>
-							<Link href="/login">
+							<Link href="/login?show=signin">
 								ログイン
 							</Link>
 						</li>
@@ -156,17 +151,24 @@ export default function Header() {
 						<label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 							<div className="w-10 rounded-full">
 								<img src={fetchUserValue.avatar} />
-								{/* <img src="/IMG_6868.jpeg" /> */}
 							</div>
 						</label>
 						<ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-						<li><a>マイページ</a></li>
-						<li onClick={handleLogout}><a>ログアウト</a></li>
+							<li>
+								<Link href={`/beerist/${fetchUserValue.user_id}`}>
+									マイページ
+								</Link>
+							</li>
+							<li onClick={handleLogout}>
+								<a>
+									ログアウト
+								</a>
+							</li>
 						</ul>
 					</div>
 				) : null}
 
-      </div>
+			</div>
     </div>
-  );
+	);
 }

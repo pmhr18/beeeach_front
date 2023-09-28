@@ -15,7 +15,6 @@ module.exports = {
         '256': '64rem',
       },
       colors: {
-        "apple": "#020617",
         "google": "#991b1b",
         "line": "#22c55e",
         "twitter": "#0ea5e9",

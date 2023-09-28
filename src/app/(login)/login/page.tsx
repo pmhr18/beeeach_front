@@ -1,28 +1,51 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link'
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faApple } from '@fortawesome/free-brands-svg-icons'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
-import { faLine } from '@fortawesome/free-brands-svg-icons'
-// import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { useSearchParams } from 'next/navigation'
 import { apiClient } from '../../utils/api';
+import LogoBeer from '../../components/common/LogoBeer';
+
+import SigninContent from '../../components/features/login/SigninContent';
+import SignupContent from '../../components/features/login/SignupContent';
+
+import { Suspense } from "react";
+import dynamic from 'next/dynamic'
+// import Loading from '../../components/common/Loading';
+
+// const SigninContent = dynamic(() => import('../../components/features/login/SigninContent'))
+// const SignupContent = dynamic(() => import('../../components/features/login/SignupContent'))
+// const Loading = lazy(() => import('../../components/common/Loading'))
+const Loading = dynamic(() => import('../../components/common/Loading'))
 
 export default function Login() {
+  const searchParams = useSearchParams();
+  const width = 128;
+  const height = 128;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const initTabParam = searchParams.get('show');
+        if (initTabParam) {
+          setSigninTabActive(initTabParam === 'signin' ? true : false);
+        }
+
+      } catch (e) {
+        console.error('ビール情報表示用のpostリクエストが失敗しました。', e);
+
+      }
+    };
+    fetchData();
+  }, []);
+
   const [loading, setLoading] = useState(false);
 
-  // Appleでサインアップを実装予定
-  // const appleLogin = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await apiClient.get('/login/google');
-  //     window.location.href = response.data;
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+  const [signinTabActive, setSigninTabActive] = useState(false);
+  const handleTabClick = () => {
+    setSigninTabActive(!signinTabActive);
+  };
 
+  // 各ソーシャルログインへのgetリクエスト
   const googleLogin = async () => {
     setLoading(true);
     try {
@@ -32,7 +55,6 @@ export default function Login() {
       console.error(e);
     }
   };
-
   const lineLogin = async () => {
     setLoading(true);
     try {
@@ -42,67 +64,55 @@ export default function Login() {
       console.error(e);
     }
   };
-
-  // Twitterでサインアップを実装予定
-  // const twitterLogin = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await apiClient.get('/login/twitter');
-  //     window.location.href = response.data;
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+  const twitterLogin = async () => {
+    setLoading(true);
+    try {
+      const response = await apiClient.get('/login/twitter');
+      window.location.href = response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
+    <>
+    <Suspense fallback={<Loading />}>
     <div className='mx-auto card w-auto py-10 sm:w-[32rem] bg-base-100 shadow-xl'>
       <div className='card-body'>
-        <Link href="/">
-          <figure>
-            <Image
-              src="/logo_beer.svg"
-              alt="beeeach Logo"
-              width={128}
-              height={128}
-              priority
-            />
-          </figure>
-				</Link>
-        <div className="tabs tabs-boxed mx-auto my-10">
-          <a className="tab">サインイン</a> 
-          <a className="tab tab-active">サインアップ</a>
-        </div>
-        <div className='font-semibold mx-auto my-3'>SNSアカウントでサインアップ</div>
-          {loading ? 
-            <span className="mx-auto my-2 loading loading-spinner loading-md text-accent"></span>
-            : 
-            <>
-              {/* <button className='btn border-apple bg-base-100 text-apple hover:border-apple hover:bg-apple hover:text-base-100 flex' onClick={appleLogin} disabled={loading}>
-                <div className='flex-one'><FontAwesomeIcon icon={faApple} className='fa-xl color-apple hover:color-base-100' /></div>
-                <div className='grow'>Appleでサインアップ</div>
-                <div className='flex-one'></div>
-              </button> */}
-              <button className='btn border-google bg-base-100 text-google hover:border-google hover:bg-google hover:text-base-100 flex' onClick={googleLogin} disabled={loading}>
-                <div className='flex-one'><FontAwesomeIcon icon={faGoogle} className='fa-xl color-google hover:color-base-100' /></div>
-                <div className='grow'>Googleでサインアップ</div>
-                <div className='flex-one'></div>
-              </button>
-              <button className='btn border-line bg-base-100 text-line hover:border-line hover:bg-line hover:text-base-100 flex' onClick={lineLogin} disabled={loading}>
-                <div className='flex-one'><FontAwesomeIcon icon={faLine} className='fa-xl color-line hover:color-base-100' /></div>
-                <div className='grow'>LINEでサインアップ</div>
-                <div className='flex-one'></div>
-              </button>
-              {/* <button className='btn border-twitter bg-base-100 text-twitter hover:border-twitter hover:bg-twitter hover:text-base-100 flex' onClick={twitterLogin} disabled={loading}> */}
-                {/* <div className='flex-one'><FontAwesomeIcon icon={faTwitter} className='fa-xl color-twitter hover:color-base-100' /></div> */}
-                {/* <div className='grow'>Twitterでサインアップ</div> */}
-                {/* <div className='flex-one'></div> */}
-              {/* </button> */}
-            </>
+
+        <figure>
+          {loading ? <LogoBeer width={width} height={height} /> : 
+            <Link href="/">
+              <LogoBeer width={width} height={height} />
+            </Link>
           }
-        <div className='text-sm mt-2'>
-          アカウントを新規登録するにあたり、<Link href="/terms" className='link link-hover'>利用規約</Link>及び<Link href="/privacy" className='link link-hover'>プライバシーポリシー</Link>に同意するものとします。
-        </div>
+        </figure>
+
+        {loading ?
+          <>
+            <span className="mx-auto my-2 text-accent"></span>
+            <span className="mx-auto my-2 loading loading-spinner loading-md text-accent"></span> 
+          </>:
+          <>
+            {signinTabActive ? 
+              <SigninContent 
+                tabClick={handleTabClick}
+                googleLogin={googleLogin}
+                lineLogin={lineLogin}
+                twitterLogin={twitterLogin}
+              /> : 
+              <SignupContent 
+                tabClick={handleTabClick}
+                googleLogin={googleLogin}
+                lineLogin={lineLogin}
+                twitterLogin={twitterLogin}
+              />
+            }
+          </>
+        }
       </div>
     </div>
+    </Suspense>
+    </>
   );
 }

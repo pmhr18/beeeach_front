@@ -13,14 +13,12 @@ export default function AuthCallbackPage() {
 				const callbackParams = Array.from(searchParams.entries());
 				const queryString = callbackParams.map(([key, value]) => `${key}=${value}`).join('&');
 				const response = await apiClient.get(`/login/google/callback?${queryString}`);
-				console.log('success!!!!!', response.data);
+        
         const { user_id } = response.data;
         const { access_token } = response.data;
+
         sessionStorage.setItem('id', user_id);
         sessionStorage.setItem('token', access_token);
-        console.log(user_id);
-        console.log(access_token);
-        console.log(sessionStorage);
 				
         router.replace('/');
       } catch (e) {
