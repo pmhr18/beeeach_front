@@ -17,15 +17,15 @@ interface CheckboxProps {
 }
 
 interface ItemProps {
-  brewery: Props[];
-  country: Props[];
-  prefecture: Props[];
-  taste: CheckboxProps[];
-  container: CheckboxProps[];
-  style: Props[];
-  color: Props[];
-  abv: Props[];
-  type: Props[];
+	brewery: Props[];
+	country: Props[];
+	prefecture: Props[];
+	taste: CheckboxProps[];
+	container: CheckboxProps[];
+	style: Props[];
+	color: Props[];
+	abv: Props[];
+	type: Props[];
 }
 
 export default function ItemStoreForm () {
@@ -35,13 +35,13 @@ export default function ItemStoreForm () {
     brewery: [],
     country: [],
     prefecture: [],
-		taste: [],
+	taste: [],
     container: [],
     style: [],
     color: [],
     abv: [],
     type: [],
-  });
+	});
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -122,14 +122,14 @@ export default function ItemStoreForm () {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const requestData = inputValues;
-  
-    try {
-      const response = await apiClient.post('/items', requestData);
-      console.log('ビール情報登録用のpostリクエストが成功しました。', response.data);
-    } catch (e) {
-      console.error('ビール情報登録用のpostリクエストが失敗しました。', e);
-    }
-  };
+
+		try {
+			const response = await apiClient.post('/items', requestData);
+			console.log('ビール情報登録用のpostリクエストが成功しました。', response.data);
+		} catch (e) {
+			console.error('ビール情報登録用のpostリクエストが失敗しました。', e);
+		}
+	};
 	
 	return (
 		<div>
