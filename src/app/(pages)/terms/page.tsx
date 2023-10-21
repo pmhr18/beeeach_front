@@ -1,9 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 
+interface SubSection {
+  subTitle: string;
+  subSections: string[];
+}
+
 interface Section {
+  sections: any[];
   title: string;
-  content: (string | string[] | Section)[];
+  subSections: SubSection[];
 }
 
 interface TermsData {
@@ -19,7 +25,6 @@ function Terms() {
         const response = await fetch('/data/terms.json');
         const jsonData = await response.json();
         setTerms(jsonData);
-        console.log(terms);
       } catch (e) {
         console.error('JSONファイルを取得できませんでした。', e);
       }
@@ -27,50 +32,50 @@ function Terms() {
     fetchData();
   }, []);
 
-  const renderContent = (content: (string | string[] | Section)[]) => {
-    return content.map((item, index) => (
-      <div key={index}>
-        {typeof item === 'string' ? (
-          <p>{item}</p>
-        ) : Array.isArray(item) ? (
-          item.length === 1 ? (
-            <p>{item[0]}</p>
-          ) : (
-            <ol>
-              {item.map((subItem, subIndex) => (
-                <li key={subIndex}>{subItem}</li>
-              ))}
-            </ol>
-          )
-        ) : (
-          <>
-            <h4>{item.title}</h4>
-            {renderContent(item.content)}
-          </>
-        )}
-      </div>
-    ));
-  };
-
   return (
     <main className="flex flex-col justify-between">
       <article className="prose max-w-none">
         <h1>利用規約</h1>
-        {terms ? (
-          <div>
-            {terms.terms.map((section, index) => (
-              <div key={index}>
-                <h3>{section.title}</h3>
-                {renderContent(section.content)}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
+        <div>
+          {terms?.terms.map((section, index) => (
+            <div key={index}>
+              <h2>{section.title}</h2>
+                {section.sections.length === 1 ? (
+                  <div>
+                    <p>{section.sections[0].subTitle}</p>
+                    {section.sections[0].subSections.length > 0 && (
+                      <ol>
+                        {section.sections[0].subSections.map((subSubSection: string, subSubIndex: number) => (
+                          <li key={subSubIndex}>{subSubSection}</li>
+                        ))}
+                      </ol>
+                    )}
+                  </div>
+                ) : (
+                  <ol>
+                    {section.sections.map((subSection: any, subIndex) => (
+                      <div key={subIndex}>
+                        <li>{subSection.subTitle}</li>
+                        {subSection.subSections.length > 0 && (
+                          <ol>
+                            {subSection.subSections.map((subSubSection: string, subSubIndex: number) => (
+                              <li key={subSubIndex}>{subSubSection}</li>
+                            ))}
+                          </ol>
+                        )}
+                      </div>
+                    ))}
+                  </ol>
+                )}
+            </div>
+          ))}
+        </div>
       </article>
+      <div className='mt-20 text-right'>以上</div>
+      <div className='mt-10'>2024年2月1日　施行</div>
     </main>
   );
 }
 
 export default Terms;
+
