@@ -6,6 +6,15 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    listStyleType: {
+      none: 'none',
+      disc: 'disc',
+      decimal: 'decimal',
+      square: 'square',
+      roman: 'lower-roman',
+      alpha: 'lower-alpha',
+      greek: 'lower-greek',
+    },
     container: {
       center: true,
     },
