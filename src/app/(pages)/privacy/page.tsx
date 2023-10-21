@@ -1,15 +1,21 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-interface SubSection {
-  subTitle: string;
-  subSections: string[];
+interface GrandChildSection {
+  grandChildTitle: string;
+  grandChildSections: string[];
+}
+
+interface ChildSection {
+  childSections: any[];
+  childTitle: string;
+  grandChildSections: GrandChildSection[];
 }
 
 interface Section {
   sections: any[];
   title: string;
-  subSections: SubSection[];
+  childSections: ChildSection[];
 }
 
 interface TermsData {
@@ -41,31 +47,63 @@ function Terms() {
           {terms?.terms.map((section, index) => (
             <div key={index}>
               <h2>{section.title}</h2>
+
+
+
                 {section.sections.length === 1 ? (
                   <div>
-                    <p>{section.sections[0].subTitle}</p>
-                    {section.sections[0].subSections.length > 0 && (
+                    <p>{section.sections[0].childTitle}</p>
+                    {section.sections[0].childSections.length > 0 && (
+
                       <ol>
-                        {section.sections[0].subSections.map((subSubSection: string, subSubIndex: number) => (
-                          <li key={subSubIndex}>{subSubSection}</li>
-                        ))}
-                      </ol>
-                    )}
-                  </div>
-                ) : (
-                  <ol>
-                    {section.sections.map((subSection: any, subIndex) => (
-                      <div key={subIndex}>
-                        <li>{subSection.subTitle}</li>
-                        {subSection.subSections.length > 0 && (
+                      {section.sections[0].childSections.map((grandChildSection: any, grandChildIndex: number) => (
+                        <div key={grandChildIndex}>
+                          <li>{grandChildSection.grandChildTitle}</li>
+                          {grandChildSection.grandChildSections.length > 0 && (
+
                           <ol>
-                            {subSection.subSections.map((subSubSection: string, subSubIndex: number) => (
-                              <li key={subSubIndex}>{subSubSection}</li>
+                          {grandChildSection.grandChildSection[0].grandChildSections.map((descendantGrandChildSection: string, descendantChildIndex: number) => (
+                            <li key={descendantChildIndex}>{descendantGrandChildSection}</li>
                             ))}
                           </ol>
+
                         )}
-                      </div>
-                    ))}
+                        </div>
+                        ))}
+                      </ol>
+
+
+                    )}
+                  </div>
+
+
+                ) : (
+                  <ol>
+                  {section.sections.map((childSection: any, childIndex) => (
+                    <div key={childIndex}>
+                      <li>{childSection.childTitle}</li>
+                      {childSection.childSections.length > 0 && (
+
+                        <ol>
+                        {childSection.childSections.map((grandChildSection: any, grandChildIndex: number) => (
+                          <div key={grandChildIndex}>
+                            <li>{grandChildSection.grandChildTitle}</li>
+                            {grandChildSection.grandChildSections.length > 0 && (
+
+                            <ol>
+                            {grandChildSection.grandChildSections.map((descendantGrandChildSection: string, descendantChildIndex: number) => (
+                              <li key={descendantChildIndex}>{descendantGrandChildSection}</li>
+                              ))}
+                            </ol>
+
+                          )}
+                          </div>
+                          ))}
+                        </ol>
+
+                      )}
+                    </div>
+                  ))}
                   </ol>
                 )}
             </div>
