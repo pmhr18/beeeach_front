@@ -36,7 +36,7 @@ function Terms() {
     <main className="flex flex-col justify-between">
       <article className="prose max-w-none">
         <h1>プライバシーポリシー</h1>
-        <p className='my-10'>beeeach運営者（以下，「運営者」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。</p>
+        <p className='mt-10 mb-16'>beeeach運営者（以下，「運営者」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。</p>
         <div>
           {terms?.terms.map((section, index) => (
             <div key={index}>
