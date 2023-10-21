@@ -18,19 +18,19 @@ interface Section {
   childSections: ChildSection[];
 }
 
-interface TermsData {
-  terms: Section[];
+interface PrivaciesData {
+  privacies: Section[];
 }
 
-function Terms() {
-  const [terms, setTerms] = useState<TermsData | null>(null);
+function Privacy() {
+  const [privacies, setPrivacies] = useState<PrivaciesData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/data/privacy.json');
         const jsonData = await response.json();
-        setTerms(jsonData);
+        setPrivacies(jsonData);
       } catch (e) {
         console.error('JSONファイルを取得できませんでした。', e);
       }
@@ -44,11 +44,9 @@ function Terms() {
         <h1>プライバシーポリシー</h1>
         <p className='mt-10 mb-16'>beeeach運営者（以下，「運営者」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。</p>
         <div>
-          {terms?.terms.map((section, index) => (
+          {privacies?.privacies.map((section, index) => (
             <div key={index}>
               <h2>{section.title}</h2>
-
-
 
                 {section.sections.length === 1 ? (
                   <div>
@@ -61,7 +59,7 @@ function Terms() {
                           <li>{grandChildSection.grandChildTitle}</li>
                           {grandChildSection.grandChildSections.length > 0 && (
 
-                          <ol>
+                          <ol className='list-roman'>
                           {grandChildSection.grandChildSection[0].grandChildSections.map((descendantGrandChildSection: string, descendantChildIndex: number) => (
                             <li key={descendantChildIndex}>{descendantGrandChildSection}</li>
                             ))}
@@ -72,10 +70,8 @@ function Terms() {
                         ))}
                       </ol>
 
-
                     )}
                   </div>
-
 
                 ) : (
                   <ol>
@@ -90,7 +86,7 @@ function Terms() {
                             <li>{grandChildSection.grandChildTitle}</li>
                             {grandChildSection.grandChildSections.length > 0 && (
 
-                            <ol>
+                            <ol className='list-roman'>
                             {grandChildSection.grandChildSections.map((descendantGrandChildSection: string, descendantChildIndex: number) => (
                               <li key={descendantChildIndex}>{descendantGrandChildSection}</li>
                               ))}
@@ -116,4 +112,4 @@ function Terms() {
   );
 }
 
-export default Terms;
+export default Privacy;
