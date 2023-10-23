@@ -57,7 +57,7 @@ export default function Header() {
 	};
 
 	return (
-    <div className="fixed lg:static navbar bg-base-100">
+    <div className="fixed lg:static navbar bg-base-100 z-50">
 			<div className="navbar-start">
 				<div className="dropdown lg:hidden">
 					<label tabIndex={0} className="btn btn-ghost btn-circle">
