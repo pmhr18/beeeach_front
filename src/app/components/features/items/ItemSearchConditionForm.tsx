@@ -19,6 +19,8 @@ interface RenderValues {
   style: CheckboxProps[];
   color: CheckboxProps[];
   abv: CheckboxProps[];
+  ibu: CheckboxProps[];
+  srm: CheckboxProps[];
   type: CheckboxProps[];
 }
 
@@ -32,6 +34,8 @@ interface ConditionValues {
   styleId: number[];
   colorId: number[];
   abvId: number[];
+  ibuId: number[];
+  srmId: number[];
   typeId: number[];
 }
 
@@ -45,6 +49,8 @@ interface ConditionChecked {
   styleChecked: boolean[];
   colorChecked: boolean[];
   abvChecked: boolean[];
+  ibuChecked: boolean[];
+  srmChecked: boolean[];
   typeChecked: boolean[];
 }
 
@@ -61,6 +67,8 @@ export default function ItemSearchConditionForm() {
     style: [],
     color: [],
     abv: [],
+    ibu: [],
+    srm: [],
     type: [],
   });
 
@@ -89,6 +97,8 @@ export default function ItemSearchConditionForm() {
     styleId: [],
     colorId: [],
     abvId: [],
+    ibuId: [],
+    srmId: [],
     typeId: [],
   });
 
@@ -102,6 +112,8 @@ export default function ItemSearchConditionForm() {
     styleChecked: [],
     colorChecked: [],
     abvChecked: [],
+    ibuChecked: [],
+    srmChecked: [],
     typeChecked: [],
   });
 
@@ -156,6 +168,12 @@ export default function ItemSearchConditionForm() {
   const handleChangeAbvChecked = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeChecked(e, 'abv');
   };
+  const handleChangeIbuChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChangeChecked(e, 'ibu');
+  };
+  const handleChangeSrmChecked = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChangeChecked(e, 'srm');
+  };
   const handleChangeTypeChecked = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeChecked(e, 'type');
   };
@@ -175,8 +193,7 @@ export default function ItemSearchConditionForm() {
       })
       .join('&');
       const url = queryParams.length > 0 ? `/items/search?${queryParams}` : '/items/search?';
-      // router.replace(url);
-      // router.push(url);
+
       window.location.href = url;
     
     } catch (e) {
@@ -251,6 +268,22 @@ export default function ItemSearchConditionForm() {
             checked={inputConditionChecked.abvChecked}
             options={renderConditionValue.abv}
             onChange={handleChangeAbvChecked}
+          />
+          <CheckboxInputOption
+            label='IBU（国際苦味単位）'
+            name='ibu'
+            value={inputConditionValues.ibuId}
+            checked={inputConditionChecked.ibuChecked}
+            options={renderConditionValue.ibu}
+            onChange={handleChangeIbuChecked}
+          />
+          <CheckboxInputOption
+            label='SRM'
+            name='srm'
+            value={inputConditionValues.srmId}
+            checked={inputConditionChecked.srmChecked}
+            options={renderConditionValue.srm}
+            onChange={handleChangeSrmChecked}
           />
           <CheckboxInputOption
             label='種類'

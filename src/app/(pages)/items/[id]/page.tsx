@@ -10,6 +10,8 @@ interface BuildItem {
   color: string;
   style: string;
   abv: string;
+  ibu: string;
+  srm: string;
   type: string;
   brewery: string;
   tastes: string[];
@@ -48,6 +50,8 @@ export default function Item({ params }: { params: { id: number } }) {
           <div className='badge badge-lg badge-accent rounded-none'>{buildItem.style}</div>
           <div>{buildItem.type}</div>
           <div>{buildItem.abv}</div>
+          <div>{buildItem.ibu}</div>
+          <div>{buildItem.srm}</div>
           <div>{buildItem.brewery}</div>
           {buildItem.tastes.map((taste, i) => (
             <div key={i} className='badge badge-primary'>

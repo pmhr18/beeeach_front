@@ -25,6 +25,8 @@ interface ItemProps {
 	style: Props[];
 	color: Props[];
 	abv: Props[];
+	ibu: Props[];
+	srm: Props[];
 	type: Props[];
 }
 
@@ -40,6 +42,8 @@ export default function ItemStoreForm () {
     style: [],
     color: [],
     abv: [],
+    ibu: [],
+    srm: [],
     type: [],
 	});
 
@@ -70,6 +74,8 @@ export default function ItemStoreForm () {
 		styleId: number;
 		colorId: number;
 		abvId: number;
+		ibuId: number;
+		srmId: number;
 		typeId: number;
 		image: string;
 	}>({
@@ -84,6 +90,8 @@ export default function ItemStoreForm () {
 		styleId: 0,
 		colorId: 0,
 		abvId: 0,
+		ibuId: 0,
+		srmId: 0,
 		typeId: 0,
 		image: '',
 	});
@@ -201,6 +209,20 @@ export default function ItemStoreForm () {
 					value={inputValues.abvId}
 					options={renderItemDetailValue.abv}
 					onChange={(e) => setInputValues({ ...inputValues, abvId: Number(e.target.value) })}
+				/>
+				<SelectInputOption
+					label='IBU（国際苦味単位）'
+					name='ibu'
+					value={inputValues.ibuId}
+					options={renderItemDetailValue.ibu}
+					onChange={(e) => setInputValues({ ...inputValues, ibuId: Number(e.target.value) })}
+				/>
+				<SelectInputOption
+					label='SRM'
+					name='srm'
+					value={inputValues.srmId}
+					options={renderItemDetailValue.srm}
+					onChange={(e) => setInputValues({ ...inputValues, srmId: Number(e.target.value) })}
 				/>
 				<SelectInputOption
 					label='種類'

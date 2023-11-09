@@ -11,15 +11,16 @@ interface CarouselItemProps {
   image_url: string;
   width: number;
   height: number;
+  likes: number;
 }
 
-function CarouselItem ({ item_id, item_name, brewery, style, image_url, width, height }:CarouselItemProps ) {
+function CarouselItem ({ item_id, item_name, brewery, style, image_url, width, height, likes }:CarouselItemProps ) {
   return (
     <Link href={`/items/${item_id}`}>
       <div className='carousel-item'>
-        <div className='card card-bordered w-80'>
+        <div className='card card-compact card-bordered w-80'>
           <figure>
-            <div className='absolute top-5 left-5 badge badge-lg badge-accent rounded-none'>
+            <div className='absolute top-5 left-5 badge badge-lg badge-accent'>
               {style}
             </div>
             <Image
@@ -32,7 +33,10 @@ function CarouselItem ({ item_id, item_name, brewery, style, image_url, width, h
           <div className='card-body'>
             <div className='card-title'>{item_name}</div>
             <div>{brewery}</div>
-            <FontAwesomeIcon icon={faHeart} className="fa-lg" />
+            <div className='ml-auto'>
+              <FontAwesomeIcon icon={faHeart} className="pr-2 fa-lg" />
+              {likes}
+            </div>
           </div>
         </div>
       </div>
